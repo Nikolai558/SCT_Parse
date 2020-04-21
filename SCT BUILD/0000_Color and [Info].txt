@@ -1,0 +1,41 @@
+#define HiContrast 11579568
+#define MedContrast 7237230
+#define LowContrast 3487029
+#define RVM 7237230
+#define MVA 3487029
+#define OVERLAY 11579568
+#define SECTOR 3487029
+#define RestrictedRed 128
+#define Taxiway 9043968
+#define TaxiLabels 12632256
+#define rwylabels 11959008
+#define Runway 11579568
+#define Ramp 7237230
+#define Building 3487029
+#define HOLDLINE 11260863
+#define ILS-C 11260863
+#define DP 9079296
+#define STAR 9061444
+#define IAP 6757223
+#define ClassBAirspace 12673280
+#define ClassCAirspace 2171267
+#define ClassDAirspace 16754769
+#define TRSA 8421504
+#define twy 8421504
+#define ramp 8421504
+#define building 16777215
+#define bldg 16777215
+#define grass 0
+#define rwy 12632256
+#define clsd 150
+
+[INFO]
+ZLC RADAR 2004
+SLC_CTR
+KSLC
+N040.47.11.029
+W111.58.46.247
+59.962
+45.574
+-14.000
+1.000
