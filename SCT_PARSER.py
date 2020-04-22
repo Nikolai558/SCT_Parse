@@ -1,5 +1,4 @@
 import os
-import logging
 
 
 try:
@@ -8,10 +7,10 @@ except FileExistsError:
     pass
 
 
-def create_file(dir, count, file_name):
+def create_file(directory_choice, count, file_name):
     global count_variable
     count_variable += 1
-    f = open(f"{dir}/{count}_{file_name}.txt", "w")
+    f = open(f"{directory_choice}/{count}_{file_name}.txt", "w")
     return f
 
 
@@ -63,7 +62,6 @@ with open("ZLC_SECTOR.SCT2", "r") as file:
                     if section1[:1] != " " and section1[:1] != '\t' and section1[:1] != "\n" and section1[:1] != "[":
                         sid_name = section1[:26].strip(" ")
                         sid_name = sid_name.replace("/", "-")
-                        #print(sid_name)
                         if os.path.exists(f"Sector_Files/{count_variable - 1}_{sid_name}.txt"):
                             certain_sid_file = open(f"Sector_Files/{count_variable - 1}_{sid_name}.txt", "a+")
                         else:
@@ -80,10 +78,8 @@ with open("ZLC_SECTOR.SCT2", "r") as file:
                     else:
                         pass
                 print("Made it through SID CHECK")
-                        #print("Came across something else: {}".format(section1[:25]))
 
             elif character[:1] == "[" and lines[:6] == "[STAR]":
-                #input("<<<<<IN LAST IF STATEMENT>>")
                 global star_name
 
                 if os.path.exists(f"Sector_Files/{count_variable - 1}_{lines[:]}.txt"):
@@ -99,7 +95,6 @@ with open("ZLC_SECTOR.SCT2", "r") as file:
                     if section6[:1] != " " and section6[:1] != '\t' and section6[:1] != "\n" and section6[:1] != "[":
                         star_name = section6[:26].strip(" ")
                         star_name = star_name.replace("/", "-")
-                        #print(star_name)
                         if os.path.exists(f"Sector_Files/{count_variable - 1}_{star_name}.txt"):
                             certain_star_file = open(f"Sector_Files/{count_variable - 1}_{star_name}.txt", "a+")
                         else:
@@ -115,22 +110,4 @@ with open("ZLC_SECTOR.SCT2", "r") as file:
                         break
                     else:
                         pass
-                        print("Came across something else: {}".format(section6[:25]))
                 print("Made it through STAR CHECK")
-                #input("<<<<>>>>>")
-            #input("<<<<out of Star if statement>>>>")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
