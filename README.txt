@@ -14,7 +14,13 @@ It will go through the sector file for the ARTCC and create individual txt files
 for each section of the sector file. Once its complete you can change out a 
 specific section (text file) with what you need. Then you can recompile it back
 into one .sct2 file. This program will create the files inside a folder located
-where the program EXE is located called "Sector_Files".
+where the program EXE is located called "Sector_Files". 
+
+Side note Kyle Sanders has created a .BAT file that will combine all txt files 
+back into one sector file. The .bat file can be found on GitHub with the following link.
+https://github.com/KSanders7070/Combine_TXT_Into_SCT - Again All Credit for 
+this batch file and the idea of my program goes to Kyle Sanders.
+
 
 Please post any issues you come across on GitHub under the Issues tab and I will
 try to correct them as they come in. 
