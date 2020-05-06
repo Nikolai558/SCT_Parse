@@ -25,14 +25,14 @@ Requirements:
 	Sector File Must be named "SECTOR.SCT2"
 	EXE must be located where it does not need ADMIN permissions to create files.
 *******************************
+Feature Requests: 
+	Simple GUI
+	Option to Combine back into one Sector File
 
 *******************************
 Known Issues:
 	Crash on startup if the above requirements are not met.
 	Must have a sector file to decompile.
-	
-	
-*******************************	
 
 *******************************
 Change Log: 
