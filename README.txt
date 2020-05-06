@@ -28,6 +28,8 @@ Requirements:
 
 *******************************
 Known Issues:
+	Crash on startup if the above requirements are not met.
+	Must have a sector file to decompile.
 	
 	
 *******************************	
