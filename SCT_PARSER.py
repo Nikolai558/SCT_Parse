@@ -15,7 +15,7 @@ def create_file(directory_choice, count, file_name):
 
 
 count_variable = 10000
-with open("ZLC_SECTOR.SCT2", "r") as file:
+with open("SECTOR.SCT2", "r") as file:
     all_lines = file.readlines()
     current_line = -1
     next_line = 0
@@ -31,7 +31,7 @@ with open("ZLC_SECTOR.SCT2", "r") as file:
                     color_file = create_file("Sector_Files", count_variable, "Colors")
                 color_file.write(lines)
                 color_file.close()
-                print("Made it through # CHECK")
+                print("Made it through Colors/define CHECK")
 
             elif character[:1] == "[" and lines[:5] != "[SID]" and lines[:6] != "[STAR]":
                 if os.path.exists(f"Sector_Files/{count_variable - 1}_{lines[:]}.txt"):
