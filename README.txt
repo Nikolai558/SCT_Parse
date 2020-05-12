@@ -1,9 +1,9 @@
 SCT_FILE_PARSER
 
 *******************************
-Version 1.0
+Version 1.1.0
 Created on 5/6/2020
-Last update: 5/6/2020 0945 MT
+Last update: 5/12/2020 1300 MT
 Created By Nikolas Boling
 Special thanks to Kyle Sanders
 For Entertainment Purposes Only, Not for real world use!
@@ -42,7 +42,17 @@ Known Issues:
 
 *******************************
 Change Log: 
-	
+	Version 1.1:
+		Fixes program crash if the sector file has an IAP that does not have
+		any data assigned to it. For example "ENV_ENV " is one that did not have
+		any data inside, so the program crashed when it reached this point.
+		
+		The program will now still create the text file but in the naming will
+		will have "__MISSING_DATA__" appended to the end of the file name and 
+		will no longer crash.
+		
+		This may change in the future to either Exclude the IAP and notify 
+		the user or list it in a different folder. Update for this soon to come.
 	
 	
 *******************************
