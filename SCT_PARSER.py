@@ -61,6 +61,7 @@ with open("SECTOR.SCT2", "r") as file:
 
                     if section1[:1] != " " and section1[:1] != '\t' and section1[:1] != "\n" and section1[:1] != "[":
                         sid_name = section1[:26].strip(" ")
+                        sid_name = sid_name.replace("\n","__MISSING_DATA__")
                         sid_name = sid_name.replace("/", "-")
                         if os.path.exists(f"Sector_Files/{count_variable - 1}_{sid_name}.txt"):
                             certain_sid_file = open(f"Sector_Files/{count_variable - 1}_{sid_name}.txt", "a+")
