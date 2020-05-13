@@ -7,11 +7,16 @@ except FileExistsError:
     pass
 
 
-def create_file(directory_choice, count, file_name):
+def create_file(directory_choice, count, file_name, data=True):
     global count_variable
-    count_variable += 1
-    f = open(f"{directory_choice}/{count}_{file_name}.txt", "w")
-    return f
+    if data == True:
+        count_variable += 1
+        f = open(f"{directory_choice}/{count}_{file_name}.txt", "w")
+        return f
+    else:
+        count_variable += 1
+        f = open(f"{directory_choice}/__MISSING_DATA__{count}_{file_name}.txt", "w")
+        return f
 
 
 count_variable = 10000
@@ -58,16 +63,28 @@ with open("SECTOR.SCT2", "r") as file:
                 sids_file.close()
                 for section1 in all_lines[current_line+1:]:
                     global certain_sid_file
-
+                    missing_data = False
                     if section1[:1] != " " and section1[:1] != '\t' and section1[:1] != "\n" and section1[:1] != "[":
                         sid_name = section1[:26].strip(" ")
-                        sid_name = sid_name.replace("\n","__MISSING_DATA__")
+
+                        if sid_name[-1:] == "\n":
+                            missing_data = True
+                            sid_name = sid_name.replace("\n", "")
+                            #sid_name = f"__MISSING_DATA__{sid_name}"
+
                         sid_name = sid_name.replace("/", "-")
-                        if os.path.exists(f"Sector_Files/{count_variable - 1}_{sid_name}.txt"):
-                            certain_sid_file = open(f"Sector_Files/{count_variable - 1}_{sid_name}.txt", "a+")
+                        if missing_data == False:
+                            if os.path.exists(f"Sector_Files/{count_variable - 1}_{sid_name}.txt"):
+                                certain_sid_file = open(f"Sector_Files/{count_variable - 1}_{sid_name}.txt", "a+")
+                            else:
+                                certain_sid_file = create_file("Sector_Files", count_variable, sid_name)
+                            certain_sid_file.write(section1)
                         else:
-                            certain_sid_file = create_file("Sector_Files", count_variable, sid_name)
-                        certain_sid_file.write(section1)
+                            if os.path.exists(f"Sector_Files/{count_variable - 1}_{sid_name}.txt"):
+                                certain_sid_file = open(f"Sector_Files/__MISSING_DATA__{count_variable - 1}_{sid_name}.txt", "a+")
+                            else:
+                                certain_sid_file = create_file("Sector_Files", count_variable, sid_name, data=False)
+                            certain_sid_file.write(section1)
 
                     elif section1[:1] == " " or section1[:1] == '\t' or section1[:1] == "\n":
                         certain_sid_file.write(section1)
