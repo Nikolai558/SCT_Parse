@@ -1,9 +1,9 @@
 SCT_FILE_PARSER
 
 *******************************
-Version 1.1.2
+Version 1.2.0
 Created on 5/6/2020
-Last update: 5/13/2020 1000 MT
+Last update: 5/13/2020 1300 MT
 Created By Nikolas Boling
 Special thanks to Kyle Sanders
 For Entertainment Purposes Only, Not for real world use!
@@ -42,6 +42,13 @@ Known Issues:
 
 *******************************
 Change Log: 
+	Version 1.2.0:
+		Added version checker. Everytime the program starts up it will check 
+		github to see if the current versions match. If they do nothing will
+		happen and the program will continue. However, if they do not match
+		it will notify the user of the new release on github. Maybe in the future
+		it will ask if you want to download the newest version.
+
 	Version 1.1.2:
 		Changed output to Console to be a little bit more clear with what it is
 		doing. For Example, the console will now tell you when it is making the
