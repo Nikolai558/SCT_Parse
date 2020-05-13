@@ -36,7 +36,7 @@ with open("SECTOR.SCT2", "r") as file:
                     color_file = create_file("Sector_Files", count_variable, "Colors")
                 color_file.write(lines)
                 color_file.close()
-                print("Made it through Colors/define CHECK")
+                print(f'Added {lines[7:-1]} to Colors.TXT')
 
             elif character[:1] == "[" and lines[:5] != "[SID]" and lines[:6] != "[STAR]":
                 if os.path.exists(f"Sector_Files/{count_variable - 1}_{lines[:]}.txt"):
@@ -50,7 +50,7 @@ with open("SECTOR.SCT2", "r") as file:
                         bracket_file.close()
                         break
                     bracket_file.write(section)
-                print("Made it through bracket CHECK")
+                print(f"Created '{lines[:-1]}'")
 
             elif character[:1] == "[" and lines[:5] == "[SID]" and lines[:6] != "[STAR]":
                 global sid_name
@@ -95,7 +95,7 @@ with open("SECTOR.SCT2", "r") as file:
                         break
                     else:
                         pass
-                print("Made it through SID CHECK")
+                print(f"Created '{lines[:-1]}' and all individual Related Files")
 
             elif character[:1] == "[" and lines[:6] == "[STAR]":
                 global star_name
@@ -128,4 +128,6 @@ with open("SECTOR.SCT2", "r") as file:
                         break
                     else:
                         pass
-                print("Made it through STAR CHECK")
+                print(f"Created '{lines[:-1]}' and all individual Related Files")
+
+input("<<< COMPLETED >>> 'press any key to exit'")

@@ -1,9 +1,9 @@
 SCT_FILE_PARSER
 
 *******************************
-Version 1.1.1
+Version 1.1.2
 Created on 5/6/2020
-Last update: 5/13/2020 0900 MT
+Last update: 5/13/2020 1000 MT
 Created By Nikolas Boling
 Special thanks to Kyle Sanders
 For Entertainment Purposes Only, Not for real world use!
@@ -42,6 +42,14 @@ Known Issues:
 
 *******************************
 Change Log: 
+	Version 1.1.2:
+		Changed output to Console to be a little bit more clear with what it is
+		doing. For Example, the console will now tell you when it is making the
+		different header files i.e. [AIRPORTS], [COLORS], [INFO].
+		
+		Added Pause at the end to make sure the user knows it completed correctly
+		and withought errors. 
+	
 	Version 1.1.1:
 		"Missing Data" will now be appended before "true File name" to really stand 
 		out in the folder. Example "__MISSING_DATA__10212_ENV_ENV .txt"
