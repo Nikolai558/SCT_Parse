@@ -6,6 +6,7 @@ program_version = "1.2.0"
 github_version = None
 count_variable = 10000
 
+
 def check_version():
     global github_version
     global program_version
@@ -200,5 +201,6 @@ def main():
 
 
 if __name__ == '__main__':
+    check_version()
     main()
     input("Program Complete\n\nPress enter to Close.")
