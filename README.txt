@@ -1,7 +1,7 @@
 SCT_FILE_PARSER
 
 *******************************
-Version 1.2.0
+Version 2.0.1
 Created on 5/6/2020
 Last update: 5/13/2020 1300 MT
 Created By Nikolas Boling
@@ -30,6 +30,7 @@ Requirements:
 	Sector File must be located where the program EXE file is located.
 	Sector File Must be named "SECTOR.SCT2"
 	EXE must be located where it does not need ADMIN permissions to create files.
+	Does not have a folder called "Sector_Files" inside of the directory the exe is.
 *******************************
 Feature Requests: 
 	Simple GUI

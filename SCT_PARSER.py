@@ -1,4 +1,5 @@
 import os
+import sys
 import urllib.request
 
 program_version = "1.2.0"
@@ -31,135 +32,173 @@ def check_version():
             check_version()
 
 
-def create_file(directory_choice, count, file_name, data=True):
-    global count_variable
-    if data == True:
-        count_variable += 1
-        f = open(f"{directory_choice}/{count}_{file_name}.txt", "w")
-        return f
-    else:
-        count_variable += 1
-        f = open(f"{directory_choice}/__MISSING_DATA__{count}_{file_name}.txt", "w")
-        return f
+file_counter = 10000
 
 
-def main_start():
+def create_folder() -> None:
+    """
+    Create's Folder to hold all of the split Sector Files.
+
+    :return: None
+    """
     try:
         os.mkdir("Sector_Files")
+        print("Creating Folder for Sector_Files")
     except FileExistsError:
-        pass
-
-    with open("SECTOR.SCT2", "r") as file:
-        all_lines = file.readlines()
-        current_line = -1
-        next_line = 0
-
-        for lines in all_lines:
-            current_line += 1
-            next_line += 1
-            for character in lines:
-                if character[:1] == "#":
-                    if os.path.exists(f"Sector_Files/{count_variable-1}_Colors.txt"):
-                        color_file = open(f"Sector_Files/{count_variable-1}_Colors.txt", "a+")
-                    else:
-                        color_file = create_file("Sector_Files", count_variable, "Colors")
-                    color_file.write(lines)
-                    color_file.close()
-                    print(f'Added {lines[7:-1]} to Colors.TXT')
-
-                elif character[:1] == "[" and lines[:5] != "[SID]" and lines[:6] != "[STAR]":
-                    if os.path.exists(f"Sector_Files/{count_variable - 1}_{lines[:]}.txt"):
-                        bracket_file = open(f"Sector_Files/{count_variable - 1}_{lines[:]}.txt", "a+")
-                    else:
-                        bracket_file = create_file("Sector_Files", count_variable, str(lines[:-1]))
-                    bracket_file.write(lines)
-                    for section in all_lines[current_line+1:]:
-                        if section[:1] == "[":
-                            bracket_file.write("\n")
-                            bracket_file.close()
-                            break
-                        bracket_file.write(section)
-                    print(f"Created '{lines[:-1]}'")
-
-                elif character[:1] == "[" and lines[:5] == "[SID]" and lines[:6] != "[STAR]":
-                    global sid_name
-                    if os.path.exists(f"Sector_Files/{count_variable - 1}_{lines[:]}.txt"):
-                        sids_file = open(f"Sector_Files/{count_variable - 1}_{lines[:]}.txt", "a+")
-                    else:
-                        sids_file = create_file("Sector_Files", count_variable, str(lines[:-1]))
-                    sids_file.write(lines)
-                    sids_file.write("\n\n")
-                    sids_file.close()
-                    for section1 in all_lines[current_line+1:]:
-                        global certain_sid_file
-                        missing_data = False
-                        if section1[:1] != " " and section1[:1] != '\t' and section1[:1] != "\n" and section1[:1] != "[":
-                            sid_name = section1[:26].strip(" ")
-
-                            if sid_name[-1:] == "\n":
-                                missing_data = True
-                                sid_name = sid_name.replace("\n", "")
-                                #sid_name = f"__MISSING_DATA__{sid_name}"
-
-                            sid_name = sid_name.replace("/", "-")
-                            if missing_data == False:
-                                if os.path.exists(f"Sector_Files/{count_variable - 1}_{sid_name}.txt"):
-                                    certain_sid_file = open(f"Sector_Files/{count_variable - 1}_{sid_name}.txt", "a+")
-                                else:
-                                    certain_sid_file = create_file("Sector_Files", count_variable, sid_name)
-                                certain_sid_file.write(section1)
-                            else:
-                                if os.path.exists(f"Sector_Files/{count_variable - 1}_{sid_name}.txt"):
-                                    certain_sid_file = open(f"Sector_Files/__MISSING_DATA__{count_variable - 1}_{sid_name}.txt", "a+")
-                                else:
-                                    certain_sid_file = create_file("Sector_Files", count_variable, sid_name, data=False)
-                                certain_sid_file.write(section1)
-
-                        elif section1[:1] == " " or section1[:1] == '\t' or section1[:1] == "\n":
-                            certain_sid_file.write(section1)
-
-                        elif section1[:1] == "[":
-                            certain_sid_file.write("\n\n")
-                            certain_sid_file.close()
-                            break
-                        else:
-                            pass
-                    print(f"Created '{lines[:-1]}' and all individual Related Files")
-
-                elif character[:1] == "[" and lines[:6] == "[STAR]":
-                    global star_name
-
-                    if os.path.exists(f"Sector_Files/{count_variable - 1}_{lines[:]}.txt"):
-                        star_file = open(f"Sector_Files/{count_variable - 1}_{lines[:]}.txt", "a+")
-                    else:
-                        star_file = create_file("Sector_Files", count_variable, str(lines[:-1]))
-                    star_file.write(lines)
-                    star_file.write("\n\n")
-                    star_file.close()
-                    for section6 in all_lines[current_line+1:]:
-                        global certain_star_file
-
-                        if section6[:1] != " " and section6[:1] != '\t' and section6[:1] != "\n" and section6[:1] != "[":
-                            star_name = section6[:26].strip(" ")
-                            star_name = star_name.replace("/", "-")
-                            if os.path.exists(f"Sector_Files/{count_variable - 1}_{star_name}.txt"):
-                                certain_star_file = open(f"Sector_Files/{count_variable - 1}_{star_name}.txt", "a+")
-                            else:
-                                certain_star_file = create_file("Sector_Files", count_variable, star_name)
-                            certain_star_file.write(section6)
-
-                        elif section6[:1] == " " or section6[:1] == '\t' or section6[:1] == "\n":
-                            certain_star_file.write(section6)
-
-                        elif section6[:1] == "[":
-                            certain_star_file.write("\n\n")
-                            certain_star_file.close()
-                            break
-                        else:
-                            pass
-                    print(f"Created '{lines[:-1]}' and all individual Related Files")
+        print("Folder for Sector_Files Found\nPlease delete that folder or rename it.\nPress Enter to Close")
+        sys.exit()
 
 
-check_version()
-main_start()
-input("<<< COMPLETED >>> 'press any key to exit'")
+def read_sector_file() -> list:
+    """
+    Read Sector File (.SCT2)
+
+    :return: List of strings.
+    """
+    try:
+        file = open("SECTOR.SCT2", "r")
+        output = file.readlines()
+        file.close()
+        print("Reading SECTOR.SCT2")
+    except FileNotFoundError:
+        input("Sector File not Found. Verify it is named 'SECTOR.SCT2'\n\nPress Enter to Close.")
+        sys.exit()
+    return output
+
+
+def create_individual_file(file_name: str, directory: str = "Sector_Files") -> open:
+    global file_counter
+    print(f"Creating File for {file_name}")
+    file = open(f"{directory}\\{file_counter}_{file_name}.txt", "w")
+    file_counter += 10
+    return file
+
+
+def parse_sections(lines: list) -> dict:
+    """
+    Sort the Sector File into the different required sections. [INFO] Must be after Colors
+
+    :param lines: List of strings (Lines in SCT2 file)
+    :return: Dictionary, Key = Required Section, Value = List of strings for that Required Section
+    """
+    output = {"STARTING": [], "COLORS": [], "INFO": [], "VOR": [], "NDB": [], "AIRPORT": [], "RUNWAY": [], "FIXES": [],
+              "ARTCC": [], "ARTCC HIGH": [], "ARTCC LOW": [], "SID": [], "STAR": [], "LOW AIRWAY": [],
+              "HIGH AIRWAY": [], "GEO": [], "REGIONS": [], "LABELS": []}
+
+    current_section = "STARTING"
+
+    for line in lines:
+        line = line.strip('\n')
+
+        if line == "":
+            line = "\n"
+
+        if current_section == "STARTING":
+            if line[0] != "#":
+                output[current_section].append(line)
+            else:
+                current_section = "COLORS"
+                output[current_section].append(line)
+            continue
+
+        if current_section == "COLORS":
+            if line[0] == "[":
+                current_section = line[1:-1]
+                output[current_section].append(line)
+            else:
+                output[current_section].append(line)
+            continue
+
+        if current_section == "INFO":
+            if line[0] == "[":
+                current_section = line[1:-1]
+                output[current_section].append(line)
+            else:
+                output[current_section].append(line)
+            continue
+
+        if line[0] == "[":
+            current_section = line[1:-1]
+            output[current_section].append(line)
+        else:
+            output[current_section].append(line)
+
+    return output
+
+
+def sub_section_helper(lines: list, sub_section: str) -> dict:
+    """
+    Help Parse SID's and STAR's into individual dictionary so that it can be printed to individual files.
+
+    :param sub_section: STAR or SID
+    :param lines: list of strings (All lines under the [SID] Section
+    :return: Dictionary containing the required sub sections, Key = FileName (Alpha Numaric Safe), Value = List
+    """
+    output = {}
+
+    key_name = None
+    for line in lines:
+        line = line.strip('\n')
+        if line == "":
+            line = "\n"
+
+        if line[0] == "[":
+            key_name = f"{sub_section}"
+            output[key_name] = []
+            output[key_name].append(line)
+            continue
+        if line[0] == ";":
+            output[key_name].append(line)
+            continue
+        if line[0] == " ":
+            output[key_name].append(line)
+            continue
+
+        temp_name = line[:26].strip()
+        if temp_name.isalnum():
+            key_name = temp_name
+        else:
+            key_name = ""
+            for c in temp_name:
+                if c.isalnum():
+                    key_name += c
+                else:
+                    key_name += "-"
+
+        output[key_name] = []
+        output[key_name].append(line)
+
+    return output
+
+
+def split_individual_sections(name: str, lines: list) -> None:
+    if name == "SID" or name == "STAR":
+        data = sub_section_helper(lines, name)
+        for k, v in data.items():
+            file = create_individual_file(k)
+            for line in v:
+                file.write(line + "\n")
+            file.close()
+        return
+
+    else:
+        file = create_individual_file(name)
+        for line in lines:
+            file.write(line + "\n")
+        file.close()
+
+
+def main():
+    all_lines = read_sector_file()
+
+    create_folder()
+
+    sections = parse_sections(all_lines)
+
+    for k, v in sections.items():
+        split_individual_sections(k, v)
+
+
+if __name__ == '__main__':
+    main()
+    input("Program Complete\n\nPress enter to Close.")
