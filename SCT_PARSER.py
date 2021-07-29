@@ -2,38 +2,41 @@ import os
 import sys
 import urllib.request
 
-program_version = "1.2.0"
-github_version = None
-count_variable = 10000
+PROGRAM_VERSION = "2.0.1"
+GITHUB_VERSION = None
+file_counter = 10000
 
 
-def check_version():
-    global github_version
-    global program_version
+def check_version() -> None:
+    """
+    Check the program version versus the github version number
+
+    :return: None
+    """
+    global GITHUB_VERSION
+    global PROGRAM_VERSION
     git_url = "https://raw.githubusercontent.com/Nikolai558/SCT_Parse/master/README.txt"
-    updateSource = urllib.request.urlopen(git_url)
-    updateContents = updateSource.readlines()
-    updateSource.close()
+    update_source = urllib.request.urlopen(git_url)
+    update_contents = update_source.readlines()
+    update_source.close()
 
-    for i in updateContents:
+    for i in update_contents:
         if i[:7] == b"Version":
-            github_version = str(i[-7:-2]).strip("b'")
+            GITHUB_VERSION = str(i[-7:-2]).strip("b'")
 
-    if github_version == program_version:
+    if GITHUB_VERSION == PROGRAM_VERSION:
         pass
     else:
-        continue_var = input(f"Your Version: {program_version}\n"
-              f"Current Version on Github: {github_version}\n"
-              f"Would you like to continue? [Y/N]: ").lower().strip()
-        if continue_var == "n":
-            exit()
-        elif continue_var == "y":
-            pass
-        else:
-            check_version()
+        while True:
+            continue_var = input(f"Your Version: {PROGRAM_VERSION}\n"
+                                 f"Current Version on Github: {GITHUB_VERSION}\n"
+                                 f"Would you like to continue? [Y/N]: ").lower().strip()
 
+            if continue_var == "n":
+                exit()
 
-file_counter = 10000
+            if continue_var == "y":
+                return
 
 
 def create_folder() -> None:
@@ -173,6 +176,13 @@ def sub_section_helper(lines: list, sub_section: str) -> dict:
 
 
 def split_individual_sections(name: str, lines: list) -> None:
+    """
+    Split Individual Sections into multiple files.
+
+    :param name: string File name
+    :param lines: List of lines inside file.
+    :return: None
+    """
     if name == "SID" or name == "STAR":
         data = sub_section_helper(lines, name)
         for k, v in data.items():
@@ -189,7 +199,12 @@ def split_individual_sections(name: str, lines: list) -> None:
         file.close()
 
 
-def main():
+def main() -> None:
+    """
+    Main Program Entry
+
+    :return: None
+    """
     all_lines = read_sector_file()
 
     create_folder()
