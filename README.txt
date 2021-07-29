@@ -3,7 +3,7 @@ SCT_FILE_PARSER
 *******************************
 Version 2.0.1
 Created on 5/6/2020
-Last update: 5/13/2020 1300 MT
+Last update: 07/29/2021 1700 MT
 Created By Nikolas Boling
 Special thanks to Kyle Sanders
 For Entertainment Purposes Only, Not for real world use!
@@ -12,6 +12,7 @@ For Entertainment Purposes Only, Not for real world use!
 This program is intended for Vatsim VRC Sector files for each ARTCC. 
 It will go through the sector file for the ARTCC and create individual txt files
 for each section of the sector file. Once its complete you can change out a 
+for each section of the sector file. Once its complete you can change out a
 specific section (text file) with what you need. Then you can recompile it back
 into one .sct2 file. This program will create the files inside a folder located
 where the program EXE is located called "Sector_Files". 
