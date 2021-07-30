@@ -153,11 +153,11 @@ def sub_section_helper(lines: list, sub_section: str) -> dict:
     """
     output: dict = {}
 
-    key_name = None
+    key_name: str = ""
     for line in lines:
         line: str = line.strip('\n')
         if line == "":
-            line:str = "\n"
+            line: str = "\n"
 
         if line[0] == "[":
             key_name: str = f"{sub_section}"
