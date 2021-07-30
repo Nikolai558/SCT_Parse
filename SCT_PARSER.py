@@ -149,7 +149,7 @@ def sub_section_helper(lines: list, sub_section: str) -> dict:
 
     :param sub_section: STAR or SID
     :param lines: list of strings (All lines under the [SID] Section
-    :return: Dictionary containing the required sub sections, Key = FileName (Alpha Numaric Safe), Value = List
+    :return: Dictionary containing the required sub sections, Key = FileName (Alpha Numeric Safe), Value = List
     """
     output: dict = {}
 
