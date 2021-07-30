@@ -84,6 +84,13 @@ def read_sector_file() -> list:
 
 
 def create_individual_file(file_name: str, directory: str = "Sector_Files") -> open:
+    """
+    Create Individual .txt file for each SCT2 Section
+
+    :param file_name: string Desired File name
+    :param directory: string desired Directory Location
+    :return: File.Open Object
+    """
     global file_counter
     print(f"Creating File for {file_name}")
     file: open = open(f"{directory}\\{file_counter}_{file_name}.txt", "w")
