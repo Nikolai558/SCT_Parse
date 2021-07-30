@@ -1,7 +1,7 @@
 SCT_FILE_PARSER
 
 *******************************
-Version 2.0.1
+Version 2.0.2
 Created on 5/6/2020
 Last update: 07/29/2021 1700 MT
 Created By Nikolas Boling

@@ -2,7 +2,7 @@ import os
 import sys
 import urllib.request
 
-PROGRAM_VERSION = "2.0.1"
+PROGRAM_VERSION = "2.0.2"
 GITHUB_VERSION = ""
 file_counter: int = 10000
 folder_counter: int = 1
